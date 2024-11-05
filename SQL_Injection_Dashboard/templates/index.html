@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">SQL Injection Testing Dashboard</h1>
+
+        <form action="/attack" method="POST">
+            <div class="mb-3">
+                <label for="security_level" class="form-label">Select Security Level</label>
+                <select class="form-select" id="security_level" name="security_level" required>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="attack_type" class="form-label">Select Attack Type</label>
+                <select class="form-select" id="attack_type" name="attack_type" required>
+                    <option value="basic">Basic Injection</option>
+                    <option value="union">Union Injection</option>
+                    <option value="blind">Blind Injection</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="user_input" class="form-label">User Input</label>
+                <input type="text" class="form-control" id="user_input" name="user_input" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Execute Attack</button>
+        </form>
+
+        {% if result is not none %}
+        <hr>
+        <h3>Attack Result</h3>
+        <p><strong>Security Level:</strong> {{ security_level }}</p>
+        <p><strong>Attack Type:</strong> {{ sql_attack_type }}</p>
+        <p><strong>User Input:</strong> {{ user_input }}</p>
+        <div class="alert alert-info">
+            <pre>{{ result }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
